@@ -1,0 +1,48 @@
+{
+  "name": "sona-music-player",
+  "version": "3.0.0",
+  "description": "Sona - Aurora library music player",
+  "author": "Machine",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.lyra.sona",
+    "productName": "Sona",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "category": "public.app-category.music"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "perMachine": false
+    }
+  },
+  "dependencies": {
+    "music-metadata": "^11.13.0"
+  },
+  "devDependencies": {
+    "electron": "^42.4.1",
+    "electron-builder": "^26.15.3"
+  },
+  "overrides": {
+    "rimraf": "^4.0.0",
+    "glob": "^13.0.0"
+  }
+}

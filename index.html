@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file: data:; img-src 'self' file: data: blob:; media-src 'self' file: data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self';" />
+  <title>Lyra</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="appShell" class="app-shell">
+    <header class="topbar app-drag">
+      <div class="lyra-brand no-drag"><span class="lyra-wordmark" aria-label="Lyra">Lyra</span></div>
+      <div class="navigation-buttons no-drag" aria-label="Navigation history">
+        <button id="navBackButton" class="navigation-button" type="button" data-action="navigate-back" aria-label="Go back" title="Go back" disabled><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+        <button id="navForwardButton" class="navigation-button" type="button" data-action="navigate-forward" aria-label="Go forward" title="Go forward" disabled><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+      </div>
+      <button class="home-button no-drag" type="button" data-action="go-home" aria-label="Home" title="Home">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 10.7 8.5-7 8.5 7"/><path d="M5.5 9.7v9.8h5v-5.4h3v5.4h5V9.7"/></svg>
+      </button>
+      <label class="global-search no-drag" for="globalSearch">
+        <span class="search-glyph"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.2" /><path d="m16 16 4.5 4.5" /></svg></span>
+        <input id="globalSearch" type="search" placeholder="What do you want to play?" autocomplete="off" />
+        <button class="search-clear" data-action="clear-search" aria-label="Clear search"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+      </label>
+      <div class="topbar-actions no-drag">
+        <button class="view-toggle" type="button" data-view="grid" aria-pressed="false" aria-label="Grid view" title="Grid view"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="6" height="6" rx="1" /><rect x="14" y="4" width="6" height="6" rx="1" /><rect x="4" y="14" width="6" height="6" rx="1" /><rect x="14" y="14" width="6" height="6" rx="1" /></svg></button>
+        <button class="view-toggle" type="button" data-view="list" aria-pressed="false" aria-label="List view" title="List view"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 6h14M5 12h14M5 18h14" /></svg></button>
+        <button class="avatar-button" data-action="open-profile" aria-label="Profile settings"><span id="profileAvatar" class="avatar-glow">N</span><svg class="ui-icon chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg></button>
+        <button class="icon-button topbar-settings" data-action="settings" aria-label="Options" title="Options"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.2 1.9 2.2.5 1.9-1.1 2.4 2.4-1.1 1.9.5 2.2L21 12l-1.9 1.2-.5 2.2 1.1 1.9-2.4 2.4-1.9-1.1-2.2.5L12 21l-1.2-1.9-2.2-.5-1.9 1.1-2.4-2.4 1.1-1.9-.5-2.2L3 12l1.9-1.2-.5-2.2-1.1-1.9 2.4-2.4 1.9 1.1 2.2-.5L12 3Z" /><circle cx="12" cy="12" r="3" /></svg></button>
+        <button class="window-button" data-action="minimize" aria-label="Minimize"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14" /></svg></button>
+        <button class="window-button" data-action="maximize" aria-label="Maximize"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="1.5" /></svg></button>
+        <button class="window-button close" data-action="close" aria-label="Close"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+      </div>
+    </header>
+
+    <section class="workspace">
+      <aside class="library-panel glass-panel">
+        <div class="panel-heading">
+          <div class="panel-heading-copy"><h1>Your Library</h1><span id="librarySummary" class="panel-summary" aria-live="polite">No folder selected</span></div>
+          <button class="library-add-folder" data-action="create-playlist" aria-label="Create playlist" title="Create a playlist folder in your music library"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14" /></svg></button>
+        </div>
+        <div class="filter-pills" role="tablist" aria-label="Library grouping">
+          <button class="filter-pill active" type="button" role="tab" aria-selected="true" data-action="library-filter" data-library-filter="playlists">Playlists</button>
+          <button class="filter-pill" type="button" role="tab" aria-selected="false" data-action="library-filter" data-library-filter="albums">Albums</button>
+        </div>
+        <label class="library-search" for="libraryFilter"><span class="search-glyph"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.2" /><path d="m16 16 4.5 4.5" /></svg></span><input id="libraryFilter" type="search" placeholder="Filter library" autocomplete="off" /></label>
+        <div id="libraryList" class="library-list"></div>
+
+      </aside>
+
+      <div class="sidebar-resizer sidebar-resizer-left" data-resize-sidebar="left" role="separator" aria-label="Resize library sidebar" aria-orientation="vertical" tabindex="0"></div>
+
+      <section id="contentView" class="content-panel glass-panel" aria-label="Playlist content"></section>
+
+      <div class="sidebar-resizer sidebar-resizer-right" data-resize-sidebar="right" role="separator" aria-label="Resize now playing sidebar" aria-orientation="vertical" tabindex="0"></div>
+
+      <aside id="nowPlayingPanel" class="now-playing-panel glass-panel" aria-label="Now playing"></aside>
+    </section>
+
+    <footer id="playerDock" class="player-dock glass-panel" aria-label="Playback controls"></footer>
+  </main>
+
+  <section id="fullscreenPlayer" class="fullscreen-player" aria-label="Fullscreen player" aria-hidden="true">
+    <div class="fullscreen-backdrop" aria-hidden="true"><div id="fullscreenBackdropArt" class="fullscreen-backdrop-art"></div><div class="fullscreen-backdrop-vignette"></div><div class="fullscreen-backdrop-glow"></div></div>
+    <div class="fullscreen-shell">
+      <div id="fullscreenPlayerContent" class="fullscreen-player-content"></div>
+    </div>
+  </section>
+
+  <audio id="audioElement" preload="metadata"></audio>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="settingsModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <section class="settings-modal glass-panel">
+      <div class="modal-heading">
+          <div><span class="eyebrow">LYRA CONTROL ROOM</span><h2 id="settingsTitle">Options</h2></div>
+        <button class="icon-button small" data-action="close-settings" aria-label="Close settings"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+      </div>
+      <div class="settings-grid">
+        <div class="settings-section">
+          <div class="settings-copy"><strong>Music library</strong><span>Your current directory is shown here. Every folder with audio becomes a playlist, while root-level tracks appear in Liked Songs.</span></div>
+          <div class="settings-row"><span id="settingsLibraryPath" class="settings-value">No folder selected</span><span class="settings-actions"><button class="secondary-button compact" data-action="reveal-library" disabled>Show in Explorer</button><button class="secondary-button compact" data-action="choose-library">Choose folder</button></span></div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-copy"><strong>Background artwork</strong><span>Choose a picture from your computer. It is saved locally for the next launch.</span></div>
+          <div class="settings-row"><span id="settingsBackgroundPath" class="settings-value">Use the selected theme background</span><span class="settings-actions"><button class="secondary-button compact" data-action="choose-background">Choose picture</button><button id="removeBackgroundButton" class="secondary-button compact danger-button" data-action="remove-background" disabled>Remove</button></span></div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-copy"><strong>Profile picture</strong><span>Choose a local image for the profile avatar in the top navigation.</span></div>
+          <div class="settings-row profile-settings-row"><div class="profile-setting-value"><span id="settingsProfilePreview" class="profile-preview">N</span><span id="settingsProfilePath" class="settings-value">Use initials</span></div><span class="settings-actions"><button class="secondary-button compact" data-action="choose-profile">Choose picture</button><button id="removeProfileButton" class="secondary-button compact danger-button" data-action="remove-profile" disabled>Remove</button></span></div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-copy"><strong>Audio spectrum</strong><span>Optional visualizer shown in the central playlist workspace. It is off by default.</span></div>
+          <label class="switch-row" for="spectrumToggle"><span>Show spectrum</span><input id="spectrumToggle" type="checkbox" /><span class="switch"><span></span></span></label>
+        </div>
+        <div class="settings-section">
+          <div class="settings-copy"><strong>Minimize to tray</strong><span>Keep music playing in the notification area when the window is closed.</span></div>
+          <label class="switch-row" for="closeToTrayToggle"><span>Close window to tray</span><input id="closeToTrayToggle" type="checkbox" /><span class="switch"><span></span></span></label>
+        </div>
+        <div class="settings-section">
+          <div class="settings-copy"><strong>Interface theme</strong><span>Choose a complete color mood for the app. Your selection is saved for the next launch.</span></div>
+          <div class="theme-grid" role="group" aria-label="Interface theme presets">
+            <button class="theme-option" type="button" data-theme-id="lyra" aria-label="Lyra Gold theme"><span class="theme-preview theme-preview-lyra"></span><span>Lyra Gold</span></button>
+            <button class="theme-option" type="button" data-theme-id="aurora" aria-label="Aurora Glass theme"><span class="theme-preview theme-preview-aurora"></span><span>Aurora Glass</span></button>
+            <button class="theme-option" type="button" data-theme-id="midnight" aria-label="Midnight Black theme"><span class="theme-preview theme-preview-midnight"></span><span>Midnight Black</span></button>
+            <button class="theme-option" type="button" data-theme-id="ember" aria-label="Ember Red theme"><span class="theme-preview theme-preview-ember"></span><span>Ember Red</span></button>
+            <button class="theme-option" type="button" data-theme-id="violet" aria-label="Violet Night theme"><span class="theme-preview theme-preview-violet"></span><span>Violet Night</span></button>
+            <button class="theme-option" type="button" data-theme-id="forest" aria-label="Forest Neon theme"><span class="theme-preview theme-preview-forest"></span><span>Forest Neon</span></button>
+            <button class="theme-option" type="button" data-theme-id="rose" aria-label="Rose Noir theme"><span class="theme-preview theme-preview-rose"></span><span>Rose Noir</span></button>
+          </div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-copy"><strong>Accent color</strong><span>Choose the highlight color used across Lyra controls, sliders, and active states.</span></div>
+          <div class="accent-controls">
+            <div class="accent-swatches" role="group" aria-label="Accent color presets">
+              <button class="accent-swatch" type="button" data-accent-color="#62f2d3" style="--swatch:#62f2d3" aria-label="Cyan"></button>
+              <button class="accent-swatch" type="button" data-accent-color="#a77bff" style="--swatch:#a77bff" aria-label="Violet"></button>
+              <button class="accent-swatch" type="button" data-accent-color="#ec78ea" style="--swatch:#ec78ea" aria-label="Pink"></button>
+              <button class="accent-swatch" type="button" data-accent-color="#f5c15c" style="--swatch:#f5c15c" aria-label="Gold"></button>
+              <button class="accent-swatch" type="button" data-accent-color="#71e08b" style="--swatch:#71e08b" aria-label="Green"></button>
+              <button class="accent-swatch" type="button" data-accent-color="#f4fbff" style="--swatch:#f4fbff" aria-label="White"></button>
+            </div>
+            <label class="accent-picker" for="accentColorPicker"><span>Custom</span><input id="accentColorPicker" type="color" value="#62f2d3" /></label>
+          </div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-copy"><strong>Diagnostic reports</strong><span>Lyra continuously records app events, playback transitions, scans, settings, and errors locally. Reports rotate automatically and home-directory paths are masked.</span></div>
+          <div class="settings-row"><span id="settingsReportPath" class="settings-value">Reports are stored in Lyra's app data folder</span><span class="settings-actions"><button class="secondary-button compact" data-action="open-reports">Open report folder</button></span></div>
+        </div>
+      </div>
+      <div class="modal-footer"><span class="muted">Changes save automatically.</span><button class="primary-button" data-action="close-settings">Done</button></div>
+    </section>
+  </div>
+
+  <div id="playlistEditModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Edit playlist">
+    <section class="playlist-edit-modal glass-panel">
+      <div class="playlist-edit-toolbar">
+        <button class="icon-button small" data-action="close-playlist-editor" aria-label="Close playlist editor"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+      </div>
+      <form id="playlistEditForm" class="playlist-edit-form">
+        <label class="edit-field"><span>Title</span><input id="playlistNameInput" name="name" type="text" maxlength="120" required autocomplete="off" /></label>
+        <label class="edit-field"><span>Description</span><textarea id="playlistDescriptionInput" name="description" rows="4" maxlength="240" placeholder="Add a note about this playlist"></textarea></label>
+        <div class="edit-field"><span>Cover artwork</span><div class="playlist-cover-editor"><div id="playlistCoverPreview" class="playlist-cover-preview"></div><div class="cover-editor-actions"><button type="button" class="secondary-button compact" data-action="choose-playlist-cover">Choose picture</button><button type="button" class="secondary-button compact danger-button" data-action="remove-playlist-cover">Remove</button><span id="playlistCoverPath" class="settings-value">Use current artwork</span></div></div></div>
+        <div class="modal-footer playlist-edit-footer"><button type="button" class="secondary-button danger-button" data-action="delete-playlist">Delete playlist</button><span class="settings-actions"><button type="button" class="secondary-button" data-action="close-playlist-editor">Cancel</button><button type="submit" class="primary-button">Save changes</button></span></div>
+      </form>
+    </section>
+  </div>
+
+  <div id="queuePanel" class="queue-panel hidden" role="dialog" aria-label="Queue">
+    <span class="queue-panel-arrow" aria-hidden="true"></span>
+    <div class="queue-panel-head">
+      <div class="queue-panel-tabs" role="tablist" aria-label="Queue view">
+        <button class="queue-tab active" type="button" role="tab" data-action="queue-tab" data-queue-view="queue">Up next</button>
+        <button class="queue-tab" type="button" role="tab" data-action="queue-tab" data-queue-view="history">History</button>
+      </div>
+      <button class="icon-button small" type="button" data-action="close-queue" aria-label="Close queue"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+    </div>
+    <div id="queueList" class="queue-list"></div>
+    <div class="queue-panel-foot">
+      <span id="queueSummary" class="muted">No tracks queued.</span>
+      <span class="queue-panel-actions">
+        <button class="queue-mini-action" type="button" data-action="export-queue">Export</button>
+        <button class="queue-mini-action danger" type="button" data-action="clear-queue">Clear</button>
+      </span>
+    </div>
+  </div>
+
+  <div id="trackContextMenu" class="track-context-menu hidden" role="menu">
+    <button data-action="context-play" role="menuitem">Play</button>
+    <button data-action="context-play-next" role="menuitem">Play next</button>
+    <button data-action="context-add-queue" role="menuitem">Add to queue</button>
+    <span class="context-separator"></span>
+    <button data-action="context-reveal" role="menuitem">Show in Explorer</button>
+    <button data-action="context-copy" role="menuitem">Copy song information</button>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
