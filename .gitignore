@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+
+# Package managers
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+build/
+out/
+coverage/
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.vite/
+.next/
+.nuxt/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# Test output
+playwright-report/
+test-results/
+coverage/
+
+# Misc
+*.local
+
+# Optional lockfiles (uncomment if your team doesn't commit them)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
